@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    transition: margin-left 0.3s; /* Smooth transition for content */
+}
+#sidebar {
+    width: 60px; /* Collapsed width */
+    height: 100%;
+    background-color: #333;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    transition: width 0.3s; /* Smooth transition for sidebar */
+    border-top-right-radius: 10px; /* Rounded corner */
+    border-bottom-right-radius: 10px; /* Rounded corner */
+}
+#sidebar.expanded {
+    width: 200px; /* Expanded width */
+}
+.menu-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+    border-top-right-radius: 10px; /* Rounded corner */
+    border-bottom-right-radius: 10px; /* Rounded corner */
+}
+.nav-links {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    padding-top: 20px;
+}
+.nav-links a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+.nav-links a:hover {
+    background-color: #575757; /* Highlight on hover */
+}
+#content {
+    margin-left: 60px; /* Space for the sidebar when collapsed */
+    padding: 20px; /* Add padding around the iframe */
+    display: flex;
+    justify-content: center; /* Centering the iframe */
+    transition: margin-left 0.3s; /* Smooth transition for content */
+}
+iframe {
+    width: 100%; /* Adjust width to occupy the available space */
+    height: 600px; /* Set height for the iframe */
+    border: none;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Shadow for the iframe */
+    transition: width 0.3s; /* Smooth transition for iframe width */
+}

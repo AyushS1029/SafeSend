@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .email-list {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            border: 1px solid #ddd;
+        }
+
+        .email-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .email-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .email-checkbox {
+            margin-right: 10px;
+        }
+
+        .email-star {
+            color: #ffd700;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .email-sender {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .email-preview {
+            flex: 1;
+            color: #555;
+        }
+
+        .email-time {
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+
+
+
+
+    <script>
+        document.querySelectorAll('.email-star').forEach(star => {
+            star.addEventListener('click', (e) => {
+                e.target.classList.toggle('starred');
+                e.target.textContent = e.target.classList.contains('starred') ? '⭐' : '★';
+            });
+        });
+
+    </script>
+
+
+</head>
+
+<body>
+    <h1>primary</h1>
+    <div class="email-list">
+        <div class="email-item">
+            <input type="checkbox" class="email-checkbox">
+            <span class="email-star">★</span>
+            <span class="email-sender">Sender Name</span>
+            <span class="email-preview">Email subject and preview content...</span>
+            <span class="email-time">10:49 PM</span>
+        </div>
+        <!-- Repeat similar blocks for each email -->
+    </div>
+
+
+</body>
+
+</html>

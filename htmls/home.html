@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three-Dot Side Navigation</title>
+    <link rel="stylesheet" href="filecss/home.css">
+</head>
+<body>
+
+<div id="sidebar" onclick="toggleSidebar(event)">
+    <button class="menu-button">&#x22EE;</button> <!-- Three-Dot Menu Icon -->
+    <div class="nav-links" id="navLinks">
+        <a href="Inbox.html" target="contentFrame">Inbox</a>
+        <a href="Starred.html" target="contentFrame">Starred</a>
+        <a href="Snoozed.html" target="contentFrame">Snoozed</a>
+        <a href="Sent.html" target="contentFrame">Sent</a>
+        <a href="Trash.html" target="contentFrame">Trash</a>
+    </div>
+</div>
+
+<div id="content">
+    <iframe name="contentFrame" src="page1.html"></iframe>
+</div>
+
+<script>
+    function toggleSidebar(event) {
+        const sidebar = document.getElementById('sidebar');
+        const navLinks = document.getElementById('navLinks');
+        const content = document.getElementById('content');
+        const iframe = document.querySelector('iframe');
+        
+        // Only toggle the sidebar if the click was on the menu button (not inside the nav links)
+        if (event.target === sidebar.querySelector('.menu-button')) {
+            sidebar.classList.toggle('expanded');
+            
+            // Toggle visibility of nav links
+            if (sidebar.classList.contains('expanded')) {
+                navLinks.style.display = 'flex'; // Show links when expanded
+                content.style.marginLeft = '200px'; // Adjust content's left margin when expanded
+                iframe.style.width = 'calc(100% - 200px)'; // Adjust iframe width when expanded
+            } else {
+                navLinks.style.display = 'none'; // Hide links when collapsed
+                content.style.marginLeft = '60px'; // Adjust content's left margin when collapsed
+                iframe.style.width = 'calc(100% - 60px)'; // Adjust iframe width when collapsed
+            }
+        }
+    }
+
+    // Prevent sidebar from closing when clicking inside the nav links
+    const navLinks = document.getElementById('navLinks');
+    navLinks.addEventListener('click', function(event) {
+        event.stopPropagation(); // Prevent click event from bubbling up to the sidebar
+    });
+</script>
+
+</body>
+</html>
