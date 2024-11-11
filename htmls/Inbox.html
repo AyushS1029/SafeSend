@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -77,10 +77,134 @@
             <span class="email-preview">Email subject and preview content...</span>
             <span class="email-time">10:49 PM</span>
         </div>
-        <!-- Repeat similar blocks for each email -->
+         Repeat similar blocks for each email 
     </div>
 
 
+</body>
+
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emails</title>
+    <style>
+        .email-list {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            border: 1px solid #ddd;
+        }
+
+        .email-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .email-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .email-checkbox {
+            margin-right: 10px;
+        }
+
+        .email-star {
+            color: #ffd700;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .email-sender {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .email-preview {
+            flex: 1;
+            color: #555;
+        }
+
+        .email-time {
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Primary Emails</h1>
+    <div class="email-list" id="emailList">
+        <p>Loading emails...</p>
+    </div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        // This function will handle rendering of emails
+        async function renderEmails() {
+            const emails = await ipcRenderer.invoke('fetch-emails'); // Request emails from the main process
+
+            const emailList = document.getElementById('emailList');
+            emailList.innerHTML = ''; // Clear any loading message or previous emails
+
+            if (emails.length > 0) {
+                emails.forEach(email => {
+                    // Create a new email item element
+                    const emailItem = document.createElement('div');
+                    emailItem.classList.add('email-item');
+                    
+                    // Create and append the checkbox
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.classList.add('email-checkbox');
+                    emailItem.appendChild(checkbox);
+
+                    // Create and append the star icon
+                    const star = document.createElement('span');
+                    star.classList.add('email-star');
+                    star.textContent = '★'; // Default unstarred
+                    star.addEventListener('click', (e) => {
+                        e.target.classList.toggle('starred');
+                        e.target.textContent = e.target.classList.contains('starred') ? '⭐' : '★';
+                    });
+                    emailItem.appendChild(star);
+
+                    // Create and append the sender name
+                    const sender = document.createElement('span');
+                    sender.classList.add('email-sender');
+                    sender.textContent = email.sender; // You can parse the sender from the email data
+                    emailItem.appendChild(sender);
+
+                    // Create and append the email preview
+                    const preview = document.createElement('span');
+                    preview.classList.add('email-preview');
+                    preview.textContent = email.snippet; // Show a snippet or preview of the email
+                    emailItem.appendChild(preview);
+
+                    // Create and append the time
+                    const time = document.createElement('span');
+                    time.classList.add('email-time');
+                    time.textContent = email.time; // Format the time appropriately
+                    emailItem.appendChild(time);
+
+                    // Append the email item to the email list
+                    emailList.appendChild(emailItem);
+                });
+            } else {
+                emailList.innerHTML = '<p>No emails found.</p>';
+            }
+        }
+
+        // Call the render function when the page is loaded
+        window.onload = renderEmails;
+    </script>
 </body>
 
 </html>

@@ -153,3 +153,36 @@ img{
 </div>
 </body>
 </html>
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gmail Electron App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #signInBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Gmail Electron App</h1>
+  <button id="signInBtn">Sign In with Google</button>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    document.getElementById('signInBtn').addEventListener('click', () => {
+      // Send a message to the main process to trigger OAuth flow
+      ipcRenderer.send('start-oauth');
+    });
+  </script>
+</body>
+</html>
+-->
